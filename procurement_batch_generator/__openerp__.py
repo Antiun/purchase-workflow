@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
-#    Copyright (c) 2014-2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
+#    Procurement Batch Generator module for Odoo
+#    Copyright (C) 2014-2015 Akretion (http://www.akretion.com)
+#    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,25 +19,18 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
+
 {
-    "name": "Purchase order lines with discounts",
-    "author": "Tiny, "
-              "Acysos S.L., "
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
-              "Odoo Community Association (OCA)",
-    "version": "1.0",
-    "contributors": [
-        'Pedro M. Baeza',
-    ],
-    "category": "Purchase Management",
-    "depends": [
-        "stock",
-        "purchase",
-    ],
-    "data": [
-        "views/purchase_discount_view.xml",
-        "report/purchase_discount_report.xml",
-    ],
-    "license": 'AGPL-3',
-    "installable": True
+    'name': 'Procurement Batch Generator',
+    'version': '0.1',
+    'category': 'Warehouse Management',
+    'license': 'AGPL-3',
+    'summary': 'Wizard to create procurements from product variants',
+    'author': 'Akretion',
+    'website': 'http://www.akretion.com',
+    'depends': ['stock'],
+    'data': ['wizard/procurement_batch_generator_view.xml'],
+    'test': ['test/procurement_batch_generator.yml'],
+    'installable': True,
 }
