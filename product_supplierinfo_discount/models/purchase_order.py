@@ -45,9 +45,10 @@ class PurchaseOrderLine(models.Model):
         product = product_obj.browse(product_id)
         from_uom = self.env.context.get('uom') or product.uom_id.id
         qty_in_product_uom = qty
+        partner = self.env['res.partner'].browse(partner_id)
         sinfos = supplierinfo_obj.search(
             [('product_tmpl_id', '=', product.product_tmpl_id.id),
-             ('name', 'child_of', partner_id)])
+             ('name', 'child_of', partner.commercial_partner_id.id)])
         if not sinfos:
             return res
         seller_uom = sinfos.product_uom.id or False
@@ -56,7 +57,7 @@ class PurchaseOrderLine(models.Model):
                 from_uom, qty, to_uom_id=seller_uom)
         pl_pinfos = pl_pinfo_obj.search(
             [('suppinfo_id', 'in', sinfos.ids)], order="min_quantity")
-        if not 'value' in res:
+        if 'value' not in res:
             res['value'] = {}
         for pl_pinfo in pl_pinfos:
             if pl_pinfo.min_quantity <= qty_in_product_uom:
